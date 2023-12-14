@@ -12,13 +12,13 @@ const Product = ({product}: IProductProps) => {
 
 			<Card.Body>
 				<Link to={`/product/${product._id}`}>
-					<Card.Title as="div">
+					<Card.Title as="div" className="product-title">
 						<strong>{product.name}</strong>
 					</Card.Title>
 				</Link>
 
 				<Card.Text as="div">
-					<Rating value={product.rating} />
+					<Rating value={product.rating} text={`${product.numReviews} reviews`} />
 				</Card.Text>
 
 				<Card.Text as="h3">{product.price}</Card.Text>
