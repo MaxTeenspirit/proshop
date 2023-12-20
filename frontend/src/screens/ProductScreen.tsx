@@ -2,23 +2,23 @@ import {useParams, Link} from 'react-router-dom';
 import {Row, Col, Image, ListGroup, Card, Button} from 'react-bootstrap';
 
 import {useGetProductDetailQuery} from '../redux/slices/productsApiSlice';
-import {Rating} from '../components';
+import {Rating, Loader, Message} from '../components';
 
 const ProductScreen = () => {
 	const {id: productId} = useParams();
 	const {data: product, isLoading, error} = useGetProductDetailQuery(productId || '');
 
 	if (isLoading) {
-		return <h2>Loading...</h2>;
+		return <Loader />;
 	}
 
 	if (!!error && 'data' in error) {
 		// @ts-ignore
-		return <div>{error?.data?.message}</div>;
+		return <Message variant="danger">{error?.data?.message}</Message>;
 	}
 
 	if (!!error && 'error' in error) {
-		return <div>{error.error}</div>;
+		return <Message variant="danger">{error.error}</Message>;
 	}
 
 	return (

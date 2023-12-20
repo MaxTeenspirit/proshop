@@ -1,22 +1,22 @@
 import {Row, Col} from 'react-bootstrap';
 
-import {Product} from '../components';
+import {Product, Loader, Message} from '../components';
 import {useGetProductsQuery} from '../redux/slices/productsApiSlice';
 
 const HomeScreen = () => {
 	const {data: products, isLoading, error} = useGetProductsQuery();
 
 	if (isLoading) {
-		return <h2>Loading...</h2>;
+		return <Loader />;
 	}
 
 	if (!!error && 'data' in error) {
 		// @ts-ignore
-		return <div>{error?.data?.message}</div>;
+		return <Message variant="danger">{error?.data?.message}</Message>;
 	}
 
 	if (!!error && 'error' in error) {
-		return <div>{error.error}</div>;
+		return <Message variant="danger">{error.error}</Message>;
 	}
 
 	return (
