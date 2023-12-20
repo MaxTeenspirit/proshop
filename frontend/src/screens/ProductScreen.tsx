@@ -1,24 +1,25 @@
-import {useEffect, useState} from 'react';
 import {useParams, Link} from 'react-router-dom';
 import {Row, Col, Image, ListGroup, Card, Button} from 'react-bootstrap';
-import axios from 'axios';
 
+import {useGetProductDetailQuery} from '../redux/slices/productsApiSlice';
 import {Rating} from '../components';
-import {IProduct} from '../components/Product/IProduct';
 
 const ProductScreen = () => {
 	const {id: productId} = useParams();
-	const [product, setProducts] = useState<IProduct>();
+	const {data: product, isLoading, error} = useGetProductDetailQuery(productId || '');
 
-	useEffect(() => {
-		const fetchProduct = async () => {
-			const {data} = await axios(`/api/products/${productId}`);
+	if (isLoading) {
+		return <h2>Loading...</h2>;
+	}
 
-			setProducts(data);
-		};
+	if (!!error && 'data' in error) {
+		// @ts-ignore
+		return <div>{error?.data?.message}</div>;
+	}
 
-		fetchProduct();
-	}, [productId]);
+	if (!!error && 'error' in error) {
+		return <div>{error.error}</div>;
+	}
 
 	return (
 		<>
