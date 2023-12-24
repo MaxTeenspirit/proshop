@@ -1,7 +1,7 @@
 import {createBrowserRouter, createRoutesFromElements, Route} from 'react-router-dom';
 
 import App from '../App';
-import {CartScreen, HomeScreen, ProductScreen, LoginScreen} from '../screens';
+import {CartScreen, HomeScreen, ProductScreen, LoginScreen, RegisterScreen} from '../screens';
 
 export const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -10,6 +10,7 @@ export const router = createBrowserRouter(
 			<Route path="/product/:id" element={<ProductScreen />}></Route>
 			<Route path="/cart" element={<CartScreen />}></Route>
 			<Route path="/login" element={<LoginScreen />}></Route>
+			<Route path="/register" element={<RegisterScreen />}></Route>
 		</Route>,
 	),
 );
