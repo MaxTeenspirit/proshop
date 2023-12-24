@@ -1,14 +1,34 @@
-import {Badge, Nav, Navbar, Container} from 'react-bootstrap';
+import {Badge, Nav, Navbar, Container, NavDropdown} from 'react-bootstrap';
 import {FaShoppingCart, FaUser} from 'react-icons/fa';
 import {LinkContainer} from 'react-router-bootstrap';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
 
-import {RootState} from '../../redux/store';
 import logo from '../../assets/logo.png';
+import {useLogoutMutation} from '../../redux/slices/usersApiSlice';
+import {logout} from '../../redux/slices/authSlice';
+import {RootState} from '../../redux/store';
 
 const Header = () => {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	const [logoutApiCall] = useLogoutMutation();
+
+	const {userInfo} = useSelector((state: RootState) => state.auth);
 	const {cartItems} = useSelector((state: RootState) => state.cart);
+
 	const cartItemsCount = cartItems.length ? cartItems.reduce((acc, curr) => acc + curr.qty, 0) : 0;
+
+	const handleLogout = async () => {
+		try {
+			await logoutApiCall({}).unwrap();
+			dispatch(logout());
+			navigate('/');
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 	return (
 		<header>
@@ -33,11 +53,20 @@ const Header = () => {
 									)}
 								</Nav.Link>
 							</LinkContainer>
-							<LinkContainer to="/login">
-								<Nav.Link>
-									<FaUser /> LogIn
-								</Nav.Link>
-							</LinkContainer>
+							{userInfo ? (
+								<NavDropdown title={userInfo.name} id="username">
+									<LinkContainer to="profile">
+										<NavDropdown.Item>Profile</NavDropdown.Item>
+									</LinkContainer>
+									<NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+								</NavDropdown>
+							) : (
+								<LinkContainer to="/login">
+									<Nav.Link>
+										<FaUser /> LogIn
+									</Nav.Link>
+								</LinkContainer>
+							)}
 						</Nav>
 					</Navbar.Collapse>
 				</Container>
