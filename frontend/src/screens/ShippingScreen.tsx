@@ -3,7 +3,7 @@ import {Form, Button} from 'react-bootstrap';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 
-import {FormContainer} from '../components';
+import {FormContainer, CheckoutSteps} from '../components';
 import {RootState} from '../redux/store';
 import {saveShippingAddress} from '../redux/slices/cartSlice';
 
@@ -44,6 +44,7 @@ const ShippingScreen = () => {
 
 	return (
 		<FormContainer>
+			<CheckoutSteps signIn shipping />
 			<h1>Shipping</h1>
 			<Form onSubmit={handleSubmit}>
 				<Form.Group className="my-2" controlId="address">
