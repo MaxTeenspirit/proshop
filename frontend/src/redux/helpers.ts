@@ -14,4 +14,26 @@ const getCartTotalPrice = (state: ICartInitialState) =>
 
 const setToLocalStorage = (name: string, state: any) => localStorage.setItem(name, JSON.stringify(state));
 
-export {addDecimals, getCartTotalPrice, getCartItemsPrice, getCartShippingPrice, getCartTaxPrice, setToLocalStorage};
+const updateCart = (state: ICartInitialState) => {
+	state.itemsPrice = getCartItemsPrice(state);
+
+	state.shippingPrice = getCartShippingPrice(state);
+
+	state.taxPrice = getCartTaxPrice(state);
+
+	state.totalPrice = getCartTotalPrice(state);
+
+	setToLocalStorage('cart', state);
+
+	return state;
+};
+
+export {
+	addDecimals,
+	getCartTotalPrice,
+	getCartItemsPrice,
+	getCartShippingPrice,
+	getCartTaxPrice,
+	setToLocalStorage,
+	updateCart,
+};

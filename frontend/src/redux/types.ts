@@ -4,6 +4,8 @@ export interface ICartInitialState {
 	shippingPrice: number;
 	taxPrice: number;
 	totalPrice: number;
+	shippingAddress: any;
+	paymentMethod: 'PayPal' | any;
 }
 
 export interface ICartItem {

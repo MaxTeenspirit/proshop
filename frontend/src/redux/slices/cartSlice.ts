@@ -1,16 +1,12 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-import {
-	getCartItemsPrice,
-	getCartShippingPrice,
-	getCartTaxPrice,
-	getCartTotalPrice,
-	setToLocalStorage,
-} from '../helpers';
+import {updateCart} from '../helpers';
 import {ICartInitialState} from '../types';
 
 const localCart = localStorage.getItem('cart');
-const initialState: ICartInitialState = !!localCart ? JSON.parse(localCart) : {cartItems: []};
+const initialState: ICartInitialState = !!localCart
+	? JSON.parse(localCart)
+	: {cartItems: [], shippingAddress: {}, paymentMethod: 'PayPal'};
 
 const cartSlice = createSlice({
 	name: 'cart',
@@ -27,34 +23,23 @@ const cartSlice = createSlice({
 				state.cartItems = [...state.cartItems, item];
 			}
 
-			state.itemsPrice = getCartItemsPrice(state);
-
-			state.shippingPrice = getCartShippingPrice(state);
-
-			state.taxPrice = getCartTaxPrice(state);
-
-			state.totalPrice = getCartTotalPrice(state);
-
-			setToLocalStorage('cart', state);
+			return updateCart(state);
 		},
 		removeFromCart: (state, action) => {
 			const id = action.payload;
 
 			state.cartItems = state.cartItems.filter((item) => item._id !== id);
 
-			state.itemsPrice = getCartItemsPrice(state);
+			return updateCart(state);
+		},
+		saveShippingAddress: (state, action) => {
+			state.shippingAddress = action.payload;
 
-			state.shippingPrice = getCartShippingPrice(state);
-
-			state.taxPrice = getCartTaxPrice(state);
-
-			state.totalPrice = getCartTotalPrice(state);
-
-			setToLocalStorage('cart', state);
+			return updateCart(state);
 		},
 	},
 });
 
-export const {addToCart, removeFromCart} = cartSlice.actions;
+export const {addToCart, removeFromCart, saveShippingAddress} = cartSlice.actions;
 
 export default cartSlice.reducer;
