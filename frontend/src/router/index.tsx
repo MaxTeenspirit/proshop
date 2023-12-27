@@ -2,7 +2,15 @@ import {createBrowserRouter, createRoutesFromElements, Route} from 'react-router
 
 import App from '../App';
 import {PrivateRoute} from '../components';
-import {CartScreen, HomeScreen, ProductScreen, LoginScreen, RegisterScreen, ShippingScreen} from '../screens';
+import {
+	CartScreen,
+	HomeScreen,
+	ProductScreen,
+	LoginScreen,
+	RegisterScreen,
+	ShippingScreen,
+	PaymentScreen,
+} from '../screens';
 
 export const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -15,6 +23,7 @@ export const router = createBrowserRouter(
 
 			<Route path="" element={<PrivateRoute />}>
 				<Route path="/shipping" element={<ShippingScreen />}></Route>
+				<Route path="/payment" element={<PaymentScreen />}></Route>
 			</Route>
 		</Route>,
 	),
