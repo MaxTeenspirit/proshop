@@ -1,4 +1,4 @@
 export interface IMessageProps {
 	variant?: 'success' | 'danger' | 'warning' | 'info';
-	children: React.ReactNode;
+	children: React.ReactNode | any;
 }

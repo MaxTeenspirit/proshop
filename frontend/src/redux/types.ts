@@ -15,4 +15,27 @@ export interface ICartItem {
 	name: string;
 	image: string;
 	countInStock: number;
+	product: string;
+}
+
+export interface IProduct {
+	_id: string;
+	name: string;
+	image: string;
+	description: string;
+	brand: string;
+	category: string;
+	price: number;
+	countInStock: number;
+	rating: number;
+	numReviews: number;
+}
+
+export interface IOrder {
+	_id: string;
+	name: string;
+	image: string;
+	price: number;
+	qty: number;
+	product: string;
 }

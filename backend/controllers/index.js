@@ -10,3 +10,11 @@ export {
 	getUsers,
 	deleteUser,
 } from './userController.js';
+export {
+	addOrderItems,
+	getUserOrders,
+	getOrderById,
+	updateOrderToPaid,
+	updateOrderToDelivered,
+	getOrders,
+} from './orderController.js';

@@ -10,6 +10,8 @@ import {
 	RegisterScreen,
 	ShippingScreen,
 	PaymentScreen,
+	PlaceOrderScreen,
+	OrderScreen,
 } from '../screens';
 
 export const router = createBrowserRouter(
@@ -24,6 +26,8 @@ export const router = createBrowserRouter(
 			<Route path="" element={<PrivateRoute />}>
 				<Route path="/shipping" element={<ShippingScreen />}></Route>
 				<Route path="/payment" element={<PaymentScreen />}></Route>
+				<Route path="/placeorder" element={<PlaceOrderScreen />}></Route>
+				<Route path="/order/:id" element={<OrderScreen />}></Route>
 			</Route>
 		</Route>,
 	),
