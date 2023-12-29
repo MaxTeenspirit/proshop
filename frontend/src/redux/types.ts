@@ -38,4 +38,8 @@ export interface IOrder {
 	price: number;
 	qty: number;
 	product: string;
+	createdAt: string;
+	totalPrice: string;
+	isPaid: boolean;
+	isDelivered: boolean;
 }

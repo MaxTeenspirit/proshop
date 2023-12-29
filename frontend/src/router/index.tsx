@@ -12,6 +12,7 @@ import {
 	PaymentScreen,
 	PlaceOrderScreen,
 	OrderScreen,
+	ProfileScreen,
 } from '../screens';
 
 export const router = createBrowserRouter(
@@ -28,6 +29,7 @@ export const router = createBrowserRouter(
 				<Route path="/payment" element={<PaymentScreen />}></Route>
 				<Route path="/placeorder" element={<PlaceOrderScreen />}></Route>
 				<Route path="/order/:id" element={<OrderScreen />}></Route>
+				<Route path="/profile" element={<ProfileScreen />}></Route>
 			</Route>
 		</Route>,
 	),
