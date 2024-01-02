@@ -55,7 +55,7 @@ const Header = () => {
 							</LinkContainer>
 							{userInfo ? (
 								<NavDropdown title={userInfo.name} id="username">
-									<LinkContainer to="profile">
+									<LinkContainer to="/profile">
 										<NavDropdown.Item>Profile</NavDropdown.Item>
 									</LinkContainer>
 									<NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
@@ -67,6 +67,19 @@ const Header = () => {
 									</Nav.Link>
 								</LinkContainer>
 							)}
+							{userInfo?.isAdmin ? (
+								<NavDropdown title="Admin menu" id="adminmenu">
+									<LinkContainer to="/admin/productlist">
+										<NavDropdown.Item>Product List</NavDropdown.Item>
+									</LinkContainer>
+									<LinkContainer to="/admin/userlist">
+										<NavDropdown.Item>User List</NavDropdown.Item>
+									</LinkContainer>
+									<LinkContainer to="/admin/orderlist">
+										<NavDropdown.Item>Order List</NavDropdown.Item>
+									</LinkContainer>
+								</NavDropdown>
+							) : null}
 						</Nav>
 					</Navbar.Collapse>
 				</Container>

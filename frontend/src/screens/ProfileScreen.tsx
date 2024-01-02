@@ -1,8 +1,9 @@
 import {useState, useEffect, FormEvent, ChangeEvent} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import {LinkContainer} from 'react-router-bootstrap';
 import {toast} from 'react-toastify';
 import {Table, Form, Button, Row, Col} from 'react-bootstrap';
-import {LinkContainer} from 'react-router-bootstrap';
+import {FaTimes, FaCheck} from 'react-icons/fa';
 
 import {RootState} from '../redux/store';
 import {useProfileMutation} from '../redux/slices/usersApiSlice';
@@ -143,8 +144,8 @@ const ProfileScreen = () => {
 									<td>{order._id}</td>
 									<td>{order.createdAt.substring(0, 10)}</td>
 									<td>{order.totalPrice}</td>
-									<td>{!!order.isPaid}</td>
-									<td>{!!order.isDelivered}</td>
+									<td>{!!order.isPaid ? <FaCheck /> : <FaTimes />}</td>
+									<td>{!!order.isDelivered ? <FaCheck /> : <FaTimes />}</td>
 									<td>
 										<LinkContainer to={`/order/${order._id}`}>
 											<Button variant="light" className="btn-sm">
