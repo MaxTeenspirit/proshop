@@ -1,6 +1,6 @@
 import {apiSlice} from './apiSlice';
 import {ORDERS_URL, PAYPAL_URL} from '../../constants';
-import {IOrder} from '../types';
+import {IOrder, IOrdersAdmin} from '../types';
 
 export const orderApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
@@ -36,7 +36,7 @@ export const orderApiSlice = apiSlice.injectEndpoints({
 			}),
 			keepUnusedDataFor: 5,
 		}),
-		getOrders: builder.query({
+		getOrders: builder.query<IOrdersAdmin[], void>({
 			query: () => ({
 				url: ORDERS_URL,
 			}),

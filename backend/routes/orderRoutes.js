@@ -15,7 +15,7 @@ const router = express.Router();
 router.route('/').post(protect, addOrderItems).get(protect, admin, getOrders);
 router.route('/mine').get(protect, getUserOrders);
 router.route('/:id').get(protect, getOrderById);
-router.route('/:id/pay').get(protect, updateOrderToPaid);
-router.route('/:id/deliver').get(protect, admin, updateOrderToDelivered);
+router.route('/:id/pay').put(protect, updateOrderToPaid);
+router.route('/:id/deliver').put(protect, admin, updateOrderToDelivered);
 
 export default router;

@@ -39,7 +39,13 @@ export interface IOrder {
 	qty: number;
 	product: string;
 	createdAt: string;
+	paidAt?: string;
+	deliveredAt?: string;
 	totalPrice: string;
 	isPaid: boolean;
 	isDelivered: boolean;
+}
+
+export interface IOrdersAdmin extends IOrder {
+	user: {_id: string; name: string};
 }
