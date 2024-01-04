@@ -1,4 +1,4 @@
 export interface IRatingProps {
-	value: number;
+	value?: number;
 	text?: string;
 }

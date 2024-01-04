@@ -8,7 +8,7 @@ const Rating = ({value, text}: IRatingProps) => {
 		const maxValue = 5;
 
 		for (let i = 1; i <= maxValue; i++) {
-			if (i <= value) {
+			if (i <= Number(value)) {
 				stars.push(<FaStar key={i} />);
 			} else if (i - 0.5 === value) {
 				stars.push(<FaStarHalfAlt key={i} />);
