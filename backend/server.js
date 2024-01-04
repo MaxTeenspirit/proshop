@@ -1,3 +1,4 @@
+import path from 'path';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
@@ -5,7 +6,7 @@ dotenv.config();
 
 import connectDB from './config/db.js';
 
-import {productRoutes, userRoutes, orderRoutes} from './routes/index.js';
+import {productRoutes, userRoutes, orderRoutes, uploadRoutes} from './routes/index.js';
 import {notFound, errorHandler} from './middleware/errorMiddleware.js';
 
 connectDB();
@@ -25,10 +26,15 @@ app.get('/', (req, res) => {
 	res.send('API is running');
 });
 
+// File route
+const __dirname = path.resolve();
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+
 // Routes
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/upload', uploadRoutes);
 
 // Configs
 app.get('/api/config/paypal', (req, res) => {
