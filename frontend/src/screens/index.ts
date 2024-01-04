@@ -9,3 +9,4 @@ export {default as PlaceOrderScreen} from './PlaceOrderScreen';
 export {default as OrderScreen} from './OrderScreen';
 export {default as ProfileScreen} from './ProfileScreen';
 export {default as OrderListScreen} from './OrderListScreen';
+export {default as ProductListScreen} from './ProductListScreen';
