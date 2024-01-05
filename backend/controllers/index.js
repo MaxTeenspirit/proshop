@@ -1,4 +1,4 @@
-export {getProducts, getProductById, createProduct, editProduct} from './productController.js';
+export {getProducts, getProductById, createProduct, editProduct, deleteProduct} from './productController.js';
 export {
 	authUser,
 	registerUser,
