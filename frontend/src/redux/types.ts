@@ -29,6 +29,7 @@ export interface IProduct {
 	countInStock: number;
 	rating?: number;
 	numReviews?: number;
+	reviews?: IReview[];
 }
 
 export interface IOrder {
@@ -55,4 +56,13 @@ export interface IUser {
 	name: string;
 	email: string;
 	isAdmin: boolean;
+}
+
+export interface IReview {
+	_id: string;
+	user: string;
+	name: string;
+	rating: number;
+	comment: string;
+	createdAt: string;
 }
