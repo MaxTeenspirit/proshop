@@ -49,3 +49,10 @@ export interface IOrder {
 export interface IOrdersAdmin extends IOrder {
 	user: {_id: string; name: string};
 }
+
+export interface IUser {
+	_id: string;
+	name: string;
+	email: string;
+	isAdmin: boolean;
+}

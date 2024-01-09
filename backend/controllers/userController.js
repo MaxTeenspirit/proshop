@@ -105,28 +105,80 @@ const updateUserProfile = asyncHandler(async (req, res, next) => {
 // @route GET /api/users
 // @access Private/Admin
 const getUsers = asyncHandler(async (req, res, next) => {
-	res.send('Get users');
+	const users = await UserModel.find({});
+	if (users) {
+		res.status(200).json(users);
+	} else {
+		res.status(404);
+		throw new Error('Users not found');
+	}
 });
 
 // @desc Get user by ID
 // @route GET /api/users/:id
 // @access Private/Admin
 const getUserById = asyncHandler(async (req, res, next) => {
-	res.send('Get user by ID');
+	const {id} = req.params;
+	const user = await UserModel.findById(id).select('-password');
+
+	if (user) {
+		res.status(200).json(user);
+	} else {
+		res.status(404);
+		throw new Error('User not found');
+	}
 });
 
 // @desc Delete user
 // @route DELETE /api/users/:id
 // @access Private/Admin
 const deleteUser = asyncHandler(async (req, res, next) => {
-	res.send('Delete users');
+	const {id} = req.params;
+	const user = await UserModel.findById(id);
+
+	if (user) {
+		if (user.isAdmin) {
+			res.status(400);
+			throw new Error('Admin user can not be deleted');
+		}
+		await UserModel.deleteOne({_id: user._id});
+		res.status(200).json({message: 'User deleted!'});
+	} else {
+		res.status(404);
+		throw new Error('User not found');
+	}
 });
 
 // @desc Update user
 // @route PUT /api/users/:id
 // @access Private/Admin
 const updateUser = asyncHandler(async (req, res, next) => {
-	res.send('Update user');
+	const {id} = req.params;
+	const user = await UserModel.findById(id);
+
+	if (user) {
+		const {name, email, password, isAdmin} = req.body;
+
+		user.name = name || user.name;
+		user.email = email || user.email;
+		user.isAdmin = isAdmin || user.isAdmin;
+
+		if (password) {
+			user.password = password;
+		}
+
+		const updatedUser = await user.save();
+
+		res.status(200).json({
+			_id: updatedUser._id,
+			name: updatedUser.name,
+			email: updatedUser.email,
+			isAdmin: updatedUser.isAdmin,
+		});
+	} else {
+		res.status(404);
+		throw new Error('User not found');
+	}
 });
 
 export {
