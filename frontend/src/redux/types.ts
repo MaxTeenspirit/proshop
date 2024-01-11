@@ -32,6 +32,12 @@ export interface IProduct {
 	reviews?: IReview[];
 }
 
+export interface IProductData {
+	pageNumber: number;
+	pages: number;
+	products: IProduct[];
+}
+
 export interface IOrder {
 	_id: string;
 	name: string;
