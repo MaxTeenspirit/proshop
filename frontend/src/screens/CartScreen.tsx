@@ -1,4 +1,4 @@
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useNavigate, useLocation} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {Row, Col, ListGroup, Image, Form, Button, Card} from 'react-bootstrap';
 import {FaTrash} from 'react-icons/fa';
@@ -11,6 +11,7 @@ import {ICartItem} from '../redux/types';
 const CartScreen = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const location = useLocation();
 
 	const cart = useSelector((state: RootState) => state.cart);
 	const {cartItems} = cart;
@@ -27,13 +28,21 @@ const CartScreen = () => {
 		navigate('/login?redirect=/shipping');
 	};
 
+	const goBack = () => {
+		if (location.key !== 'default') {
+			navigate(-1);
+		} else {
+			navigate('/');
+		}
+	};
+
 	return (
 		<Row>
 			<Col md={8}>
 				<h1 style={{marginBottom: '20px'}}>Shopping Cart</h1>
 				{cartItems.length === 0 ? (
 					<Message>
-						Your cart is empty <Link to="/">Go Back</Link>
+						Your cart is empty <Button onClick={goBack}>Go Back</Button>
 					</Message>
 				) : (
 					<ListGroup variant="flush">

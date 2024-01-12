@@ -1,6 +1,6 @@
 import React, {useState, FormEvent} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {useParams, Link, useNavigate} from 'react-router-dom';
+import {useParams, useNavigate, useLocation} from 'react-router-dom';
 import {Row, Col, Image, ListGroup, Card, Button, Form} from 'react-bootstrap';
 import {toast} from 'react-toastify';
 
@@ -12,6 +12,8 @@ import {RootState} from '../redux/store';
 const ProductScreen = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const location = useLocation();
+
 	const {id: productId} = useParams();
 	const {userInfo} = useSelector((state: RootState) => state.auth);
 
@@ -59,11 +61,19 @@ const ProductScreen = () => {
 		}
 	};
 
+	const goBack = () => {
+		if (location.key !== 'default') {
+			navigate(-1);
+		} else {
+			navigate('/');
+		}
+	};
+
 	return (
 		<>
-			<Link to="/" className="btn btn-light my-3">
+			<Button onClick={goBack} className="btn btn-light my-3">
 				Go Back
-			</Link>
+			</Button>
 			{!!product && (
 				<>
 					<Row>
