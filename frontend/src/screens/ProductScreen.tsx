@@ -6,7 +6,7 @@ import {toast} from 'react-toastify';
 
 import {useGetProductDetailQuery, useCreateReviewMutation} from '../redux/slices/productsApiSlice';
 import {addToCart} from '../redux/slices/cartSlice';
-import {Rating, Loader, Message} from '../components';
+import {Rating, Loader, Message, Meta} from '../components';
 import {RootState} from '../redux/store';
 
 const ProductScreen = () => {
@@ -76,6 +76,7 @@ const ProductScreen = () => {
 			</Button>
 			{!!product && (
 				<>
+					<Meta title={product.name} />
 					<Row>
 						<Col md={5}>
 							<Image src={product.image} alt={product.name} fluid />

@@ -9,7 +9,7 @@ import {RootState} from '../redux/store';
 import {useProfileMutation} from '../redux/slices/usersApiSlice';
 import {useGetMyOrdersQuery} from '../redux/slices/orderApiSlice';
 import {setCredentials} from '../redux/slices/authSlice';
-import {Message, Loader} from '../components';
+import {Message, Loader, Meta} from '../components';
 
 const ProfileScreen = () => {
 	const dispatch = useDispatch();
@@ -74,6 +74,7 @@ const ProfileScreen = () => {
 
 	return (
 		<Row>
+			<Meta title="Your ProShop Profile" />
 			<Col md={3}>
 				<h2>User Profile</h2>
 

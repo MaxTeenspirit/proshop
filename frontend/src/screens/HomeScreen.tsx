@@ -1,7 +1,7 @@
 import {Row, Col} from 'react-bootstrap';
 import {useParams, useSearchParams} from 'react-router-dom';
 
-import {Product, Loader, Message, Paginate, Search, Carousel} from '../components';
+import {Product, Loader, Message, Paginate, Search, Carousel, Meta} from '../components';
 import {useGetProductsQuery} from '../redux/slices/productsApiSlice';
 
 const HomeScreen = () => {
@@ -26,6 +26,7 @@ const HomeScreen = () => {
 
 	return (
 		<>
+			<Meta />
 			<h1>Latest Products</h1>
 			<Search />
 			{!searchParams && <Carousel />}
