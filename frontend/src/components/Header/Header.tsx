@@ -7,6 +7,7 @@ import {useNavigate} from 'react-router-dom';
 import logo from '../../assets/logo.png';
 import {useLogoutMutation} from '../../redux/slices/usersApiSlice';
 import {logout} from '../../redux/slices/authSlice';
+import {resetCart} from '../../redux/slices/cartSlice';
 import {RootState} from '../../redux/store';
 
 const Header = () => {
@@ -24,6 +25,7 @@ const Header = () => {
 		try {
 			await logoutApiCall({}).unwrap();
 			dispatch(logout());
+			dispatch(resetCart());
 			navigate('/');
 		} catch (err) {
 			console.log(err);

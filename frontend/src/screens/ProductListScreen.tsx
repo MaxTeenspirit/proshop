@@ -14,7 +14,7 @@ import {Message, Loader, Paginate} from '../components';
 const ProductListScreen = () => {
 	const {pageNumber} = useParams();
 
-	const {data, isLoading, error, refetch} = useGetProductsQuery({pageNumber, keyword: null});
+	const {data, isLoading, error, refetch} = useGetProductsQuery({pageNumber, keyword: ''});
 	const [createProduct, {isLoading: loadingNewProduct}] = useCreateProductMutation();
 	const [deleteProduct, {isLoading: loadingDelete}] = useDeleteProductMutation();
 
