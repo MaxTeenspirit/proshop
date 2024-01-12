@@ -1,16 +1,18 @@
 import {ChangeEvent, useState, useCallback, useEffect} from 'react';
 import {Form} from 'react-bootstrap';
-import {useSearchParams} from 'react-router-dom';
+import {useSearchParams, useLocation} from 'react-router-dom';
 
 import {debounce} from '../../helpers';
 
 const Search = () => {
+	const location = useLocation();
 	const [getSearchParams, setSearchParams] = useSearchParams();
 
 	const [searchText, setSearchText] = useState('');
 
 	useEffect(() => {
 		const searchParam = getSearchParams.get('search') || '';
+
 		if (searchParam) {
 			setSearchText(searchParam);
 		} else {
@@ -19,7 +21,7 @@ const Search = () => {
 		return () => {
 			setSearchText('');
 		};
-	}, []);
+	}, [location.search]);
 
 	const setDebouncedSearch = debounce((searchValue) => {
 		setSearchParams({search: searchValue});

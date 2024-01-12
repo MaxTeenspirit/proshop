@@ -10,3 +10,4 @@ export {default as AdminRoute} from './AdminRoute';
 export {default as CheckoutSteps} from './CheckoutSteps';
 export {default as Paginate} from './Paginate';
 export {default as Search} from './Search';
+export {default as Carousel} from './Carousel';

@@ -5,6 +5,7 @@ export {
 	editProduct,
 	deleteProduct,
 	createProductReview,
+	getTopProducts,
 } from './productController.js';
 
 export {
